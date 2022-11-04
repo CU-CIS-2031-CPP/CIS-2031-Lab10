@@ -51,13 +51,21 @@ bool contains(List* haystack, string needle){
 }
 
 void insertAt(List* &list, int pos, string value){
-    //❓ Lab Question 11
-    //YOUR CODE HERE
+    if ( list == NULL || pos == 0 ){
+        list = new List{value, list};
+    } else {
+        insertAt(list->next, pos-1, value);
+    }
 }
 
-void deleteAt(List* &list, int pos, string value){
-    //❓ Lab Question 11
-    //YOUR CODE HERE
+void deleteAt(List* &list, int pos){
+    if ( list == NULL ){
+        //We've gone off the end, there is nothing to do
+    } else if ( pos == 0 ){
+        list = list->next;
+    } else {
+        deleteAt(list->next, pos-1);
+    }
 }
 
 void main(){
