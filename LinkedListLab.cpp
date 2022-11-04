@@ -59,12 +59,17 @@ void insertAt(List* &list, int pos, string value){
 }
 
 void deleteAt(List* &list, int pos){
-    if ( list == NULL ){
-        //We've gone off the end, there is nothing to do
-    } else if ( pos == 0 ){
+    if ( pos == 0 ){
         list = list->next;
     } else {
-        deleteAt(list->next, pos-1);
+        List *l = list;
+        while( l != NULL && pos > 1 ){
+            pos--;
+            l = l->next;
+        }
+        if ( l != NULL && l->next != NULL ){
+            l->next = l->next->next;
+        }
     }
 }
 
@@ -82,13 +87,9 @@ void main(){
     prepend(dinner, "Turnips"); //❓ Lab Question 7
     printList(dinner);
 
-    //❓ Lab Question 6
-    // YOUR CODE TO REMOVE TURNIPS HERE:
+
+    deleteAt(dinner, 7);
     printList(dinner);
 
-    //❓ Lab Question 10
-    cout << endl;
-    cout << "Is there Turkey? " << contains(dinner, "Turkey") << endl;
-    cout << "Is there Spam? " << contains(dinner, "Spam") << endl;
 
 }
